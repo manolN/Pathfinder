@@ -1,11 +1,11 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/commons.html::head"></head>
+<head th:replace="~{fragments/commons.html::head}"></head>
 <body>
 <div class="wrapper">
     <!-- Navigation -->
-<header th:replace="fragments/commons.html::navigation"></header>
+<header th:replace="~{fragments/commons.html::navigation}"></header>
 
     <section class="road">
         <div>
@@ -18,5 +18,5 @@
 </div>
 <!-- Wrapper Ends -->
 </body>
-<footer th:replace="fragments/commons.html::footer" class="footer bg-blur rounded"></footer>
+<footer th:replace="~{fragments/commons.html::footer}" class="footer bg-blur rounded"></footer>
 </html>

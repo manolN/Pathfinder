@@ -1,11 +1,12 @@
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="fragments/commons.html::head"></head>
+<head th:replace="~{fragments/commons.html::head}"></head>
 <body>
 <div class="wrapper">
     <!-- Navigation -->
-    <header th:replace="fragments/commons.html::navigation"></header>
+    <header th:replace="~{fragments/commons.html::navigation}"></header>
     <!-- Top Container -->
     <section class="top-container">
         <div class="showcase">
@@ -78,7 +79,7 @@
 </div>
 <!-- Wrapper Ends -->'
 
-<footer th:replace="fragments/commons.html::footer" class="footer bg-blur rounded"></footer>
+<footer th:replace="~{fragments/commons.html::footer}" class="footer bg-blur rounded"></footer>
 </body>
 
 </html>

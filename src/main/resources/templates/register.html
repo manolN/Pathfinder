@@ -1,7 +1,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/commons.html::head"></head>
+<head th:replace="~{fragments/commons.html::head}"></head>
 <body>
 <main class="p-5 align-content-center bg-blur my-register-div">
     <h1 class="border-bottom">Register</h1>
@@ -121,6 +121,6 @@
         </div>
     </div>
 </main>
-<footer th:replace="fragments/commons.html::footer" class="footer bg-blur rounded"></footer>
+<footer th:replace="~{fragments/commons.html::footer}" class="footer bg-blur rounded"></footer>
 </body>
 </html>

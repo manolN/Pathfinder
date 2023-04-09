@@ -18,7 +18,7 @@ public class UserEntity extends BaseEntity {
     private LevelEnum level;
     @Column(nullable = false)
     private String password;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
 
     public String getUsername() {
