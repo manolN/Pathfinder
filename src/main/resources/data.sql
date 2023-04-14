@@ -9,20 +9,20 @@ INSERT INTO roles (id, role)
 VALUES (3, 'USER');
 
 -- some test users
-INSERT INTO users (id, age, full_name, level, password, username)
-VALUES (1, 28, 'Admin Adminov', 'ADVANCED',
+INSERT INTO users (id, age, email, full_name, level, password, username)
+VALUES (1, 28, "admin@gmail.com", 'Admin Adminov', 'ADVANCED',
         '0980a79c92f2b80a0f0c57412f8ddc79f2eb68d31c961e465fb66aeb0a15d1db74c4bd93c5cd583e', 'admin');
 
-INSERT INTO users (id, age, full_name, level, password, username)
-VALUES (2, 29, 'Moderator Moderatorov', 'INTERMEDIATE',
+INSERT INTO users (id, age, email, full_name, level, password, username)
+VALUES (2, 29, "moderator@gmail.com", 'Moderator Moderatorov', 'INTERMEDIATE',
         'b5df6cc08357fbfb10c374f9f612d2590d7407d6733dd7134ecf0b0446d0d8bfbdcbd6a0a54049e1', 'moderator');
 
-INSERT INTO users (id, age, full_name, level, password, username)
-VALUES (3, 30, 'User Userov', 'BEGINNER',
+INSERT INTO users (id, age, email, full_name, level, password, username)
+VALUES (3, 30, "user@gmail.com", 'User Userov', 'BEGINNER',
         '508fbe90df53ab5c6f29ba789f2ac1cd194eb50d64968696f4a9fc99c1138853cf8fcde511180667', 'user');
 
-INSERT INTO users (id, age, full_name, level, password, username)
-VALUES (4, 33, 'Ivan Ivanov', 'BEGINNER',
+INSERT INTO users (id, age, email, full_name, level, password, username)
+VALUES (4, 33, "ivan@gmail.com", 'Ivan Ivanov', 'BEGINNER',
         'dafd4d7622b3c516aa3eda66e0bda74fb5678f2300e0edb50c74dee2c34f8c9c5dd5f61a61beccc3', 'ivan');
 -- user roles
 -- admin

@@ -2,6 +2,7 @@ package com.softuni.Pathfinder.model.entity;
 
 import com.softuni.Pathfinder.model.entity.enums.LevelEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class UserEntity extends BaseEntity {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
+    @Email
+    @Column(unique = true, nullable = false)
+    private String email;
 
     public String getUsername() {
         return username;
@@ -72,6 +76,15 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity setRoles(List<RoleEntity> roles) {
         this.roles = roles;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public UserEntity setEmail(String email) {
+        this.email = email;
         return this;
     }
 }
