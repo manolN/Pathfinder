@@ -42,7 +42,6 @@ public class UserController {
     public String onFailedLogin(@ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
                                 RedirectAttributes redirectAttributes) {
 
-        redirectAttributes.addFlashAttribute("username", username);
         redirectAttributes.addFlashAttribute("bad_credentials", true);
 
         return "login";
