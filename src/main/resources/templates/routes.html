@@ -7,14 +7,12 @@
     <!-- Navigation -->
     <header th:replace="~{fragments/commons.html::navigation}"></header>
 
-    <section class="road">
-        <img src="/images/pic4.jpg" alt="Title image">
+    <section th:each="route: ${routes}" th:object="${route}" class="road">
+        <img th:src="*{pictureUrl}" alt="Title image">
         <div>
-            <h2>Your Route</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae alias reiciendis deleniti possimus nemo
-                non repellendus?
-                Quae atque vero modi quidem! Autem cupiditate fugit doloribus ad amet, asperiores provident commodi.</p>
-            <a href="/" class="btn">Learn More</a>
+            <h2 th:text="*{name}">Your Route</h2>
+            <p th:text="*{description}">Description</p>
+            <a th:href="@{/routes/{id}/details(id=*{id})}" class="btn">Learn More</a>
         </div>
     </section>
 </div>
