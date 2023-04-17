@@ -1,33 +1,38 @@
-package com.softuni.Pathfinder.model.entity;
+package com.softuni.Pathfinder.model.view;
 
+import com.softuni.Pathfinder.model.entity.CategoryEntity;
+import com.softuni.Pathfinder.model.entity.PictureEntity;
+import com.softuni.Pathfinder.model.entity.UserEntity;
 import com.softuni.Pathfinder.model.entity.enums.LevelEnum;
-import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity
-@Table(name = "routes")
-public class RouteEntity extends BaseEntity {
+public class RouteDetailsView {
 
-    @Column(unique = true, nullable = false)
+    private Long id;
     private String name;
-    @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
-    @Column(columnDefinition = "LONGTEXT")
     private String gpxCoordinates;
-    @Enumerated(EnumType.STRING)
     private LevelEnum level;
     private String videoUrl;
-    @ManyToOne
     private UserEntity author;
-    @ManyToMany
     private List<CategoryEntity> categories;
+    private List<PictureEntity> pictures;
+
+    public Long getId() {
+        return id;
+    }
+
+    public RouteDetailsView setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     public String getName() {
         return name;
     }
 
-    public RouteEntity setName(String name) {
+    public RouteDetailsView setName(String name) {
         this.name = name;
         return this;
     }
@@ -36,7 +41,7 @@ public class RouteEntity extends BaseEntity {
         return description;
     }
 
-    public RouteEntity setDescription(String description) {
+    public RouteDetailsView setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -45,7 +50,7 @@ public class RouteEntity extends BaseEntity {
         return gpxCoordinates;
     }
 
-    public RouteEntity setGpxCoordinates(String gpxCoordinates) {
+    public RouteDetailsView setGpxCoordinates(String gpxCoordinates) {
         this.gpxCoordinates = gpxCoordinates;
         return this;
     }
@@ -54,7 +59,7 @@ public class RouteEntity extends BaseEntity {
         return level;
     }
 
-    public RouteEntity setLevel(LevelEnum level) {
+    public RouteDetailsView setLevel(LevelEnum level) {
         this.level = level;
         return this;
     }
@@ -63,7 +68,7 @@ public class RouteEntity extends BaseEntity {
         return videoUrl;
     }
 
-    public RouteEntity setVideoUrl(String videoUrl) {
+    public RouteDetailsView setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
         return this;
     }
@@ -72,7 +77,7 @@ public class RouteEntity extends BaseEntity {
         return author;
     }
 
-    public RouteEntity setAuthor(UserEntity author) {
+    public RouteDetailsView setAuthor(UserEntity author) {
         this.author = author;
         return this;
     }
@@ -81,8 +86,17 @@ public class RouteEntity extends BaseEntity {
         return categories;
     }
 
-    public RouteEntity setCategories(List<CategoryEntity> categories) {
+    public RouteDetailsView setCategories(List<CategoryEntity> categories) {
         this.categories = categories;
+        return this;
+    }
+
+    public List<PictureEntity> getPictures() {
+        return pictures;
+    }
+
+    public RouteDetailsView setPictures(List<PictureEntity> pictures) {
+        this.pictures = pictures;
         return this;
     }
 }

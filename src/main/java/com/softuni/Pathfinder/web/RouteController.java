@@ -4,6 +4,7 @@ import com.softuni.Pathfinder.service.RouteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -22,6 +23,14 @@ public class RouteController {
         model.addAttribute("routes", routeService.getAllRoutes());
 
         return "routes";
+    }
+
+    @GetMapping("/{id}/details")
+    public String routeDetails(@PathVariable Long id, Model model) {
+
+        model.addAttribute("route", routeService.getRouteById(id));
+
+        return "route-details";
     }
 
     @GetMapping("/add")

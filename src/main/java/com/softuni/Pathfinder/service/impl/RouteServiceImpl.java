@@ -1,6 +1,8 @@
 package com.softuni.Pathfinder.service.impl;
 
+import com.softuni.Pathfinder.model.entity.PictureEntity;
 import com.softuni.Pathfinder.model.entity.RouteEntity;
+import com.softuni.Pathfinder.model.view.RouteDetailsView;
 import com.softuni.Pathfinder.model.view.RouteView;
 import com.softuni.Pathfinder.repository.PictureRepository;
 import com.softuni.Pathfinder.repository.RouteRepository;
@@ -38,5 +40,14 @@ public class RouteServiceImpl implements RouteService {
                     return routeView;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public RouteDetailsView getRouteById(Long id) {
+        RouteDetailsView routeDetailsView = modelMapper
+                .map(routeRepository.getById(id), RouteDetailsView.class);
+        routeDetailsView.setPictures(pictureRepository.findByRouteId(id));
+
+        return routeDetailsView;
     }
 }
