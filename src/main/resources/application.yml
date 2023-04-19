@@ -6,12 +6,12 @@ spring:
     password: 1234
   servlet:
     multipart:
-      max-file-size: 1MB
-      max-request-size: 5MB
+      max-file-size: 10MB
+      max-request-size: 10MB
   mvc:
     hiddenmethod:
       filter:
-        enabled: false
+        enabled: true
   sql:
     init:
       mode: always
@@ -34,7 +34,7 @@ spring:
 #    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 #    org.springframework.security: DEBUG
 #Cloudinary Properties
-#cloudinary:
-  #api-key: 
-  #api-secret: 
-  #cloud-name: 
+cloudinary:
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+  cloud-name: dq8ppl1ky
