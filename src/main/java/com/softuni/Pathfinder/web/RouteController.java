@@ -1,20 +1,31 @@
 package com.softuni.Pathfinder.web;
 
+import com.softuni.Pathfinder.model.binding.RouteAddBindingModel;
+import com.softuni.Pathfinder.model.entity.enums.CategoryEnum;
+import com.softuni.Pathfinder.model.entity.enums.LevelEnum;
+import com.softuni.Pathfinder.model.service.RouteAddServiceModel;
 import com.softuni.Pathfinder.service.RouteService;
+import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/routes")
 public class RouteController {
 
     private final RouteService routeService;
+    private final ModelMapper modelMapper;
 
-    public RouteController(RouteService routeService) {
+    public RouteController(RouteService routeService, ModelMapper modelMapper) {
         this.routeService = routeService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping
@@ -34,7 +45,44 @@ public class RouteController {
     }
 
     @GetMapping("/add")
-    public String addRoute() {
+    public String addRoute(Model model) {
+
+        model.addAttribute("levels", LevelEnum.values());
+        model.addAttribute("categories", CategoryEnum.values());
+
         return "add-route";
+    }
+
+    @PostMapping("/add")
+    public String addRoute(@Valid RouteAddBindingModel routeAddBindingModel,
+                           BindingResult bindingResult, RedirectAttributes redirectAttributes, Principal principal) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes
+                    .addFlashAttribute("routeAddBindingModel", routeAddBindingModel);
+            redirectAttributes
+                    .addFlashAttribute("org.springframework.validation.BindingResult.routeAddBindingModel",
+                            bindingResult);
+
+            return "redirect:/routes/add";
+        }
+
+        RouteAddServiceModel serviceModel = modelMapper.map(routeAddBindingModel, RouteAddServiceModel.class);
+
+        boolean createSuccessful = routeService.createRoute(serviceModel, principal);
+
+        if (createSuccessful) {
+            return "redirect:/routes";
+        }
+
+        redirectAttributes
+                .addFlashAttribute("routeAddBindingModel", routeAddBindingModel);
+
+        return "redirect:/routes/add";
+    }
+
+    @ModelAttribute
+    public RouteAddBindingModel routeAddBindingModel() {
+        return new RouteAddBindingModel();
     }
 }

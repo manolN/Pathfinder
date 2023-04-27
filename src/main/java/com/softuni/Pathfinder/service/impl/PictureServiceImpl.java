@@ -21,13 +21,12 @@ public class PictureServiceImpl implements PictureService {
     private final PictureRepository pictureRepository;
     private final CloudinaryService cloudinaryService;
     private final RouteRepository routeRepository;
-    private final UserRepository userRepository;
 
-    public PictureServiceImpl(PictureRepository pictureRepository, CloudinaryService cloudinaryService, RouteRepository routeRepository, UserRepository userRepository) {
+    public PictureServiceImpl(PictureRepository pictureRepository, CloudinaryService cloudinaryService,
+                              RouteRepository routeRepository) {
         this.pictureRepository = pictureRepository;
         this.cloudinaryService = cloudinaryService;
         this.routeRepository = routeRepository;
-        this.userRepository = userRepository;
     }
 
     @Override
