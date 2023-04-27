@@ -48,13 +48,7 @@ public class RouteServiceImpl implements RouteService {
                 .stream()
                 .map(r -> {
                     RouteView routeView = modelMapper.map(r, RouteView.class);
-                    List<PictureEntity> pictures = pictureRepository.findByRouteId(r.getId());
-
-                    if (pictures.isEmpty()) {
-                        routeView.setPictureUrl("/images/pic4.jpg");
-                    } else {
-                        routeView.setPictureUrl(pictureRepository.findByRouteId(r.getId()).get(0).getUrl());
-                    }
+                    setPictures(r.getId(), routeView);
 
                     return routeView;
                 })
@@ -111,5 +105,40 @@ public class RouteServiceImpl implements RouteService {
         routeRepository.save(routeEntity);
 
         return true;
+    }
+
+    @Override
+    public List<RouteView> getRouteByCategory(String category) {
+        List<RouteEntity> routes = null;
+
+        if (category.equalsIgnoreCase("pedestrian")) {
+            routes = routeRepository.getAllPedestrianRoutes();
+        } else if (category.equalsIgnoreCase("car")) {
+            routes = routeRepository.getAllCarRoutes();
+        } else if (category.equalsIgnoreCase("bicycle")) {
+            routes = routeRepository.getAllBicycleRoutes();
+        } else if (category.equalsIgnoreCase("motorcycle")) {
+            routes = routeRepository.getAllMotorcycleRoutes();
+        }
+
+        return routes
+                .stream()
+                .map(r -> {
+                    RouteView routeView = modelMapper.map(r, RouteView.class);
+                    setPictures(r.getId(), routeView);
+
+                    return routeView;
+                })
+                .collect(Collectors.toList());
+    }
+
+    private void setPictures(Long routeId, RouteView routeView) {
+        List<PictureEntity> pictures = pictureRepository.findByRouteId(routeId);
+
+        if (pictures.isEmpty()) {
+            routeView.setPictureUrl("/images/pic4.jpg");
+        } else {
+            routeView.setPictureUrl(pictureRepository.findByRouteId(routeId).get(0).getUrl());
+        }
     }
 }

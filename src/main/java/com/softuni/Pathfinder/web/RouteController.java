@@ -81,6 +81,38 @@ public class RouteController {
         return "redirect:/routes/add";
     }
 
+    @GetMapping("/pedestrian")
+    public String pedestrianRoutes(Model model) {
+
+        model.addAttribute("pedestrianRoutes", routeService.getRouteByCategory("pedestrian"));
+
+        return "pedestrian";
+    }
+
+    @GetMapping("/car")
+    public String carRoutes(Model model) {
+
+        model.addAttribute("carRoutes", routeService.getRouteByCategory("car"));
+
+        return "car";
+    }
+
+    @GetMapping("/bicycle")
+    public String bicycleRoutes(Model model) {
+
+        model.addAttribute("bicycleRoutes", routeService.getRouteByCategory("bicycle"));
+
+        return "bicycle";
+    }
+
+    @GetMapping("/motorcycle")
+    public String motorcycleRoutes(Model model) {
+
+        model.addAttribute("motorcycleRoutes", routeService.getRouteByCategory("motorcycle"));
+
+        return "motorcycle";
+    }
+
     @ModelAttribute
     public RouteAddBindingModel routeAddBindingModel() {
         return new RouteAddBindingModel();

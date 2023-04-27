@@ -15,4 +15,6 @@ public interface RouteService {
     RouteDetailsView getRouteById(Long id);
 
     boolean createRoute(RouteAddServiceModel routeAddServiceModel, Principal principal) throws IOException;
+
+    List<RouteView> getRouteByCategory(String category);
 }

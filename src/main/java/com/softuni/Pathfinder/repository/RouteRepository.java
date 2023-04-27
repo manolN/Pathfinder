@@ -17,4 +17,16 @@ public interface RouteRepository extends JpaRepository<RouteEntity, Long> {
     RouteEntity getById(Long routeId);
 
     Optional<RouteEntity> getByName(String name);
+
+    @Query("SELECT r FROM RouteEntity r JOIN r.categories c WHERE c.name = 'PEDESTRIAN'")
+    List<RouteEntity> getAllPedestrianRoutes();
+
+    @Query("SELECT r FROM RouteEntity r JOIN r.categories c WHERE c.name = 'CAR'")
+    List<RouteEntity> getAllCarRoutes();
+
+    @Query("SELECT r FROM RouteEntity r JOIN r.categories c WHERE c.name = 'BICYCLE'")
+    List<RouteEntity> getAllBicycleRoutes();
+
+    @Query("SELECT r FROM RouteEntity r JOIN r.categories c WHERE c.name = 'MOTORCYCLE'")
+    List<RouteEntity> getAllMotorcycleRoutes();
 }
