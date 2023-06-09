@@ -127,6 +127,11 @@ INSERT INTO routes_categories VALUES (4,4);
 INSERT INTO routes_categories VALUES (5,1);
 INSERT INTO routes_categories VALUES (5,2);
 
+INSERT INTO comments(approved, created, text_content, author_id, route_id)
+VALUES (true, '2023-05-01 13:13:13.779477', 'comment', 3, 2);
+
+INSERT INTO comments(approved, created, text_content, author_id, route_id)
+VALUES (true, '2023-05-01 13:15:07.540990', 'second comment', 3, 2);
 
 
 INSERT INTO pictures(title, url, author_id, route_id)

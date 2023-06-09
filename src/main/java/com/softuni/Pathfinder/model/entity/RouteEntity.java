@@ -22,6 +22,8 @@ public class RouteEntity extends BaseEntity {
     private UserEntity author;
     @ManyToMany
     private List<CategoryEntity> categories;
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY)
+    private List<CommentEntity> comments;
 
     public String getName() {
         return name;
@@ -83,6 +85,15 @@ public class RouteEntity extends BaseEntity {
 
     public RouteEntity setCategories(List<CategoryEntity> categories) {
         this.categories = categories;
+        return this;
+    }
+
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public RouteEntity setComments(List<CommentEntity> comments) {
+        this.comments = comments;
         return this;
     }
 }

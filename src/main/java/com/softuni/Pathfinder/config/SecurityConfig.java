@@ -24,7 +24,7 @@ public class SecurityConfig {
                 // everyone can download static resources(html, css, js)
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 // pages available for everyone
-                .requestMatchers("/", "/routes", "/routes/pedestrian", "/routes/bicycle",
+                .requestMatchers("/", "/api/{routeId}/comments", "/routes", "/routes/pedestrian", "/routes/bicycle",
                         "/routes/car", "/routes/motorcycle", "/routes/{id}/details", "/about",
                         "/users/login", "/users/login-error", "/users/register").permitAll()
                 // pages available only for admins

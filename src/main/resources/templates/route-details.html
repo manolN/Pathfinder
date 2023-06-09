@@ -6,7 +6,7 @@
 <div class="wrapper">
     <header th:replace="~{fragments/commons.html::navigation}"></header>
 
-    <input type="hidden" name="routeId" id="routeId">
+    <input type="hidden" name="routeId" id="routeId" th:value="${route.id}">
     <div th:object="${route}" class="details-main">
         <section class="route-info text-center">
             <h4 id="track-name" th:text="*{name}"></h4>
@@ -61,7 +61,7 @@
             <div>
                 <!-- Comments submission -->
                 <form id="commentForm" method="POST"
-                      action="/">
+                      th:action="@{/api/{routeId}/comments/add(routeId=*{id})}">
                     <div class="form-group">
                         <h4>Leave a comment</h4>
                         <label for="message">Message</label>
@@ -71,8 +71,8 @@
                                   rows="5"
                                   class="form-control"
                                   style="background-color: white;"></textarea>
-                        <small id="messageError" class="invalid-feedback">
-                            Message should be at least 10 characters.
+                        <small id="messageError" class="invalid-feedback alert alert-danger">
+                            Message should be at least 5 characters.
                         </small>
                     </div>
 
@@ -95,10 +95,10 @@
         </section>
         <p style="visibility: hidden">GPX Download: <a id="gpxDownload"></a></p>
     </div>
-	<!-- Scripts: track and comments 
+	<!-- Scripts: track and comments
     <script th:src="@{/js/track.js}"></script>
+    -->
     <script th:src="@{/js/comments.js}"></script>
-	-->
 </div>
 <footer th:replace="~{fragments/commons.html::footer}" class="footer bg-blur rounded"></footer>
 </body>
