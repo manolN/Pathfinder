@@ -4,10 +4,12 @@ import com.softuni.Pathfinder.model.entity.RoleEntity;
 import com.softuni.Pathfinder.model.entity.UserEntity;
 import com.softuni.Pathfinder.model.entity.enums.LevelEnum;
 import com.softuni.Pathfinder.model.service.UserRegisterServiceModel;
+import com.softuni.Pathfinder.model.view.UserProfileView;
 import com.softuni.Pathfinder.repository.RoleRepository;
 import com.softuni.Pathfinder.repository.UserRepository;
 import com.softuni.Pathfinder.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +50,21 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return true;
+    }
+
+    @Override
+    public UserProfileView getUserInfo(String username) {
+        Optional<UserEntity> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isEmpty()) {
+            return null;
+        }
+
+        UserEntity userEntity = optionalUser.get();
+
+        return new UserProfileView()
+                .setUsername(userEntity.getUsername())
+                .setFullName(userEntity.getFullName())
+                .setAge(userEntity.getAge());
     }
 }
