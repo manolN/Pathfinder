@@ -7,6 +7,7 @@
     <header th:replace="~{fragments/commons.html::navigation}"></header>
 
     <input type="hidden" name="routeId" id="routeId" th:value="${route.id}">
+    <input type="hidden" name="routeCoordinates" id="routeCoordinates" th:value="${route.gpxCoordinates}">
     <div th:object="${route}" class="details-main">
         <section class="route-info text-center">
             <h4 id="track-name" th:text="*{name}"></h4>
@@ -95,9 +96,8 @@
         </section>
         <p style="visibility: hidden">GPX Download: <a id="gpxDownload"></a></p>
     </div>
-	<!-- Scripts: track and comments
+<!--	Scripts: track and comments-->
     <script th:src="@{/js/track.js}"></script>
-    -->
     <script th:src="@{/js/comments.js}"></script>
 </div>
 <footer th:replace="~{fragments/commons.html::footer}" class="footer bg-blur rounded"></footer>
