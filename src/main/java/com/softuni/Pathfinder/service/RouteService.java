@@ -17,4 +17,6 @@ public interface RouteService {
     boolean createRoute(RouteAddServiceModel routeAddServiceModel, Principal principal) throws IOException;
 
     List<RouteView> getRouteByCategory(String category);
+
+    RouteView getMostCommentedRoute();
 }

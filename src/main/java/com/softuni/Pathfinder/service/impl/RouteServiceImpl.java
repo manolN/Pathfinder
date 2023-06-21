@@ -132,6 +132,15 @@ public class RouteServiceImpl implements RouteService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public RouteView getMostCommentedRoute() {
+        RouteEntity routeEntity = routeRepository.getMostCommentedRoute();
+        RouteView routeView = modelMapper.map(routeEntity, RouteView.class);
+        setPictures(routeEntity.getId(), routeView);
+
+        return routeView;
+    }
+
     private void setPictures(Long routeId, RouteView routeView) {
         List<PictureEntity> pictures = pictureRepository.findByRouteId(routeId);
 

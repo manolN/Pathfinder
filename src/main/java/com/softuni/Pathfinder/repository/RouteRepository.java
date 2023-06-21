@@ -29,4 +29,7 @@ public interface RouteRepository extends JpaRepository<RouteEntity, Long> {
 
     @Query("SELECT r FROM RouteEntity r JOIN r.categories c WHERE c.name = 'MOTORCYCLE'")
     List<RouteEntity> getAllMotorcycleRoutes();
+
+    @Query("SELECT r FROM RouteEntity r ORDER BY size(r.comments) DESC LIMIT 1")
+    RouteEntity getMostCommentedRoute();
 }
