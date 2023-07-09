@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: "jdbc:hsqldb:mem:testdb;sql.syntax_mys=true"
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+cloudinary:
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+  cloud-name: dq8ppl1ky
