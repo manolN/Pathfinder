@@ -8,4 +8,8 @@ public interface UserService {
     boolean register(UserRegisterServiceModel userRegisterServiceModel);
 
     UserProfileView getUserInfo(String username);
+
+    boolean isPasswordsMatch(String password, String confirmPassword);
+
+    boolean isUsernameOccupied(String username);
 }
