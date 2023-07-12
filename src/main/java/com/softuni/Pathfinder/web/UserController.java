@@ -1,9 +1,7 @@
 package com.softuni.Pathfinder.web;
 
 import com.softuni.Pathfinder.model.binding.UserRegisterBindingModel;
-import com.softuni.Pathfinder.model.entity.UserEntity;
 import com.softuni.Pathfinder.model.service.UserRegisterServiceModel;
-import com.softuni.Pathfinder.repository.UserRepository;
 import com.softuni.Pathfinder.service.UserService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -26,13 +24,10 @@ public class UserController {
 
     private final UserService userService;
     private final ModelMapper modelMapper;
-    private final UserRepository userRepository;
 
-    public UserController(UserService userService, ModelMapper modelMapper,
-                          UserRepository userRepository) {
+    public UserController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
-        this.userRepository = userRepository;
     }
 
     // LOGIN
@@ -52,16 +47,18 @@ public class UserController {
 
     // REGISTER
     @GetMapping("/register")
-    public String register() {
+    public String register(@ModelAttribute("occupiedUsername") String value) {
         return "register";
     }
 
     @PostMapping("/register")
     public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("isTrue", false);
 
-        if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
+        boolean passwordsMatch = userService
+                .isPasswordsMatch(userRegisterBindingModel.getPassword(), userRegisterBindingModel.getConfirmPassword());
+
+        if (!passwordsMatch) {
             bindingResult
                     .addError(new FieldError("userRegisterBindingModel",
                             "confirmPassword", "confirmPassword must match password"));
@@ -71,12 +68,19 @@ public class UserController {
                             "password", "password must match confirmPassword"));
         }
 
-        UserEntity optUser = userRepository.findByUsername(userRegisterBindingModel.getUsername()).orElse(null);
+        redirectAttributes
+                .addFlashAttribute("occupiedUsername", false);
 
-        if (optUser != null) {
+        boolean usernameOccupied = userService
+                .isUsernameOccupied(userRegisterBindingModel.getUsername());
+
+        if (usernameOccupied) {
             bindingResult
                     .addError(new FieldError("userRegisterBindingModel",
                             "username", "Username occupied"));
+
+            redirectAttributes
+                    .addFlashAttribute("occupiedUsername", true);
         }
 
         if (bindingResult.hasErrors()) {
@@ -84,25 +88,16 @@ public class UserController {
                     .addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes
                     .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",
-                    bindingResult);
-            redirectAttributes
-                    .addFlashAttribute("occupiedUsername", false);
+                            bindingResult);
 
-            return "register";
+            return "redirect:/users/register";
         }
 
         UserRegisterServiceModel serviceModel = modelMapper.map(userRegisterBindingModel, UserRegisterServiceModel.class);
 
-        boolean registerSuccessful = userService.register(serviceModel);
+        userService.register(serviceModel);
 
-        if (registerSuccessful) {
-            return "redirect:/login";
-        }
-
-        redirectAttributes
-                .addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
-
-        return "redirect:/register";
+        return "redirect:/users/login";
     }
 
     @GetMapping("/profile")
