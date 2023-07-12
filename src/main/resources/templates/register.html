@@ -22,10 +22,10 @@
                                id="inputUsername"
                                class="form-control"
                                aria-describedby="usernameHelpInline">
-                        <small id="usernameError"
+                        <small th:if="${occupiedUsername == false}" id="usernameError"
                                class="invalid-feedback alert alert-danger">Username length must be more than 3 characters</small>
 
-                        <small id="usernameUniqueError"
+                        <small th:if="${occupiedUsername}" id="usernameUniqueError"
                                class="invalid-feedback alert alert-danger">Username is already occupied</small>
 
                     </div>
