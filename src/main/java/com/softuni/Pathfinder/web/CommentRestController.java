@@ -65,14 +65,10 @@ public class CommentRestController {
     @DeleteMapping("/api/{routeId}/comments/{commentId}/delete")
     public ResponseEntity<String> deleteComment(@PathVariable Long routeId, @PathVariable Long commentId) {
 
-        boolean isDeleted = commentService
+        commentService
                 .deleteComment(new CommentServiceModel()
                         .setCommentId(commentId)
                         .setRouteId(routeId));
-
-        if (!isDeleted) {
-
-        }
 
         return ResponseEntity
                 .ok("Comment deleted");
