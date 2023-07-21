@@ -70,6 +70,10 @@ public class RouteServiceImpl implements RouteService {
             return false;
         }
 
+        if (routeAddServiceModel.getCategories().size() == 0) {
+            return false;
+        }
+
         RouteEntity routeEntity = modelMapper.map(routeAddServiceModel, RouteEntity.class);
 
         List<CategoryEntity> categories = routeAddServiceModel
@@ -80,7 +84,7 @@ public class RouteServiceImpl implements RouteService {
 
         routeEntity.setCategories(categories);
 
-        if (!routeAddServiceModel.getVideoUrl().isBlank()) {
+        if (!routeAddServiceModel.getVideoUrl().equals("")) {
             String videoUrlSubstring = routeAddServiceModel
                     .getVideoUrl()
                     .substring(routeAddServiceModel.getVideoUrl().length() - 11);
@@ -88,7 +92,7 @@ public class RouteServiceImpl implements RouteService {
             routeEntity.setVideoUrl(videoUrlSubstring);
         }
 
-        if (!routeAddServiceModel.getGpxCoordinates().isEmpty()) {
+        if (routeAddServiceModel.getGpxCoordinates() != null) {
             String gpxCoordinates = routeAddServiceModel
                     .getGpxCoordinates()
                     .getResource()
