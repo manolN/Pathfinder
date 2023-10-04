@@ -1,5 +1,5 @@
 # Pathfinder
- Pathfinder is a web app that allows you to create mountain routes with coordinates and upload photos of them in Cloudinary. It's written in Java using Spring MVC.
+ Pathfinder is a web app that allows you to create mountain routes with coordinates and upload photos of them in Cloudinary. It's written in Java using Spring.
  
 ## Features
 * Register a new user or login with an existing one.
